@@ -1,0 +1,30 @@
+<div class="game-container">
+  <div class="status">
+    @if (gameStatus === 'playing') {
+      <p>Current Player: {{ currentPlayer }}</p>
+    } @else if (gameStatus === 'won') {
+      <p class="winner">Player {{ winner }} Wins!</p>
+    } @else {
+      <p>Game Draw!</p>
+    }
+  </div>
+
+  <div class="board">
+    @for (row of board; track $index; let i = $index) {
+      <div class="row">
+        @for (cell of row; track $index; let j = $index) {
+          <button 
+            class="cell" 
+            [class.x]="cell === 'X'"
+            [class.o]="cell === 'O'"
+            (click)="makeMove(i, j)"
+          >
+            {{ cell }}
+          </button>
+        }
+      </div>
+    }
+  </div>
+
+  <button class="reset-button" (click)="resetGame()">Reset Game</button>
+</div>
